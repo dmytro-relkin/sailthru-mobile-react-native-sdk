@@ -38,7 +38,7 @@ class RNEngageBySailthruModule (reactContext: ReactApplicationContext) : ReactCo
     }
 
     @ReactMethod
-    fun logEventWithVars(eventName: String, varsMap: ReadableMap) {
+    fun logEvent(eventName: String, varsMap: ReadableMap) {
         var varsJson: JSONObject? = null
         try {
             varsJson = jsonConverter.convertMapToJson(varsMap)
