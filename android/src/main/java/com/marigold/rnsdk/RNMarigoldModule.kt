@@ -108,13 +108,14 @@ class RNMarigoldModule(reactContext: ReactApplicationContext) : ReactContextBase
     }
 
     @ReactMethod
-    fun setGeoIPTrackingEnabledWithPromise(enabled: Boolean, promise: Promise) {
+    fun setGeoIPTrackingEnabled(enabled: Boolean, promise: Promise) {
         marigold.setGeoIpTrackingEnabled(enabled, object : Marigold.MarigoldHandler<Void?> {
-            override fun onComplete(result: Void?) {
-                promise.resolve(null)
+            override fun onSuccess(value: Void?) {
+                promise.resolve(true)
             }
-            override fun onError(error: Throwable) {
-                promise.reject("ERROR", error)
+
+            override fun onFailure(error: Error) {
+                promise.reject(ERROR_CODE_DEVICE, error.message)
             }
         })
     }
