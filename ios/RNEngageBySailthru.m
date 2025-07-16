@@ -139,9 +139,12 @@ RCT_EXPORT_METHOD(clearAttributes:(RCTPromiseResolveBlock)resolve rejecter:(RCTP
 
 RCT_EXPORT_METHOD(logEvent:(NSString *)name vars:(NSDictionary*)varsDict resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
   if (varsDict) {
-    [[self engageBySailthruWithRejecter:reject] logEvent:name withVars:varsDict resolver:resolve rejecter:reject];
+    [[self engageBySailthruWithRejecter:reject] logEvent:name withVars:varsDict];
   } else {
-    [[self engageBySailthruWithRejecter:reject] logEvent:name resolver:resolve rejecter:reject];
+    [[self engageBySailthruWithRejecter:reject] logEvent:name];
+  }
+  if (resolve) {
+    resolve(nil);
   }
 }
 
