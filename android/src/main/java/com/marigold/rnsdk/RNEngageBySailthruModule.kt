@@ -33,19 +33,18 @@ class RNEngageBySailthruModule (reactContext: ReactApplicationContext) : ReactCo
     internal var jsonConverter = JsonConverter()
 
     @ReactMethod
-    fun logEvent(value: String) {
-        createEngageBySailthru()?.logEvent(value)
-    }
-
-    @ReactMethod
-    fun logEvent(eventName: String, varsMap: ReadableMap) {
-        var varsJson: JSONObject? = null
-        try {
-            varsJson = jsonConverter.convertMapToJson(varsMap)
-        } catch (e: JSONException) {
-            e.printStackTrace()
+    fun logEvent(eventName: String, varsMap: ReadableMap? = null) {
+        if (varsMap != null) {
+            var varsJson: JSONObject? = null
+            try {
+                varsJson = jsonConverter.convertMapToJson(varsMap)
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+            createEngageBySailthru()?.logEvent(eventName, varsJson)
+        } else {
+            createEngageBySailthru()?.logEvent(eventName)
         }
-        createEngageBySailthru()?.logEvent(eventName, varsJson)
     }
 
     @ReactMethod

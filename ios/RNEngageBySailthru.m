@@ -137,12 +137,12 @@ RCT_EXPORT_METHOD(clearAttributes:(RCTPromiseResolveBlock)resolve rejecter:(RCTP
 
 #pragma mark - Events
 
-RCT_EXPORT_METHOD(logEvent:(NSString *)name) {
-    [[self engageBySailthruWithRejecter:nil] logEvent:name];
-}
-
-RCT_EXPORT_METHOD(logEvent:(NSString *)name withVars:(NSDictionary*)varsDict) {
-    [[self engageBySailthruWithRejecter:nil] logEvent:name withVars:varsDict];
+RCT_EXPORT_METHOD(logEvent:(NSString *)name vars:(NSDictionary*)varsDict resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+  if (varsDict) {
+    [[self engageBySailthruWithRejecter:reject] logEvent:name withVars:varsDict resolver:resolve rejecter:reject];
+  } else {
+    [[self engageBySailthruWithRejecter:reject] logEvent:name resolver:resolve rejecter:reject];
+  }
 }
 
 #pragma mark - IDs
