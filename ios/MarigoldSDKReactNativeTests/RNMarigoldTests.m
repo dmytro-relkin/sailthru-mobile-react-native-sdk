@@ -12,6 +12,7 @@
 -(void)resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
 -(void)updateLocation:(CGFloat)lat lon:(CGFloat)lon;
 -(void)getDeviceID:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
+-(void)setGeoIPTrackingEnabled:(BOOL)enabled;
 -(void)setGeoIPTrackingEnabled:(BOOL)enabled resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
 -(void)setGeoIPTrackingDefault:(BOOL)enabled;
 -(void)setCrashHandlersEnabled:(BOOL)enabled;

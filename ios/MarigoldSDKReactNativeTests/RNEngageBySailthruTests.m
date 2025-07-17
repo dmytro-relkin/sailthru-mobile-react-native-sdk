@@ -12,7 +12,7 @@
 -(void)removeAttribute:(NSString *)key resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
 -(void)clearAttributes:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
 -(void)logEvent:(NSString *)name;
--(void)logEvent:(NSString *)name vars:(NSDictionary*)varsDict resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
+-(void)logEvent:(NSString *)name withVars:(NSDictionary*)varsDict;
 -(void)setUserId:(NSString *)userID resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
 -(void)setUserEmail:(NSString *)userEmail resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
 -(void)trackClick:(NSString *)sectionID url:(NSString *)url resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
@@ -273,7 +273,7 @@ describe(@"RNEngageBySailthru", ^{
             NSDictionary* eventVars = @{ @"varKey" : @"varValue" };
             [[engageBySailthru should] receive:@selector(logEvent:withVars:) withArguments:event, eventVars];
             
-            [rnEngageBySailthru logEvent:event vars:eventVars resolver:nil rejecter:nil];
+            [rnEngageBySailthru logEvent:event withVars:eventVars];
         });
     });
     

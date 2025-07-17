@@ -67,19 +67,21 @@ RCT_EXPORT_METHOD(getDeviceID:(RCTPromiseResolveBlock)resolve
 }
 
 #pragma mark - Switches
-RCT_EXPORT_METHOD(setGeoIPTrackingEnabled:(BOOL)enabled resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-  if (resolve) {
+RCT_EXPORT_METHOD(setGeoIPTrackingEnabled:(BOOL)enabled
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+{
     [self.marigold setGeoIPTrackingEnabled:enabled withResponse:^(NSError * _Nullable error) {
-      if (error) {
-        [RNMarigold rejectPromise:reject withError:error];
-      } else {
-        resolve(nil);
-      }
+        if (error) {
+            [RNMarigold rejectPromise:reject withError:error];
+        } else {
+            if (resolve) {
+                resolve(nil);
+            }
+        }
     }];
-  } else {
-    [self.marigold setGeoIPTrackingEnabled:enabled];
-  }
 }
+
 
 RCT_EXPORT_METHOD(setCrashHandlersEnabled:(BOOL)enabled) {
     [self.marigold setCrashHandlersEnabled:enabled];
